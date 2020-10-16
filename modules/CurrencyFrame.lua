@@ -123,16 +123,17 @@ do
 		if not index then return end
 		repeat
 			index = index + 1
-			if index > GetCurrencyListSize() then return end
-			CurrencyListInfo = GetCurrencyListInfo(index)
-			if CurrencyListInfo.name then
-				if CurrencyListInfo.isHeader then
-					if not CurrencyListInfo.isHeaderExpanded then
-						tinsert(collapse, 1, index)
-						ExpandCurrencyList(index, true)
+				if index <= GetCurrencyListSize() then
+				CurrencyListInfo = GetCurrencyListInfo(index)
+				if CurrencyListInfo.name then
+					if CurrencyListInfo.isHeader then
+						if not CurrencyListInfo.isHeaderExpanded then
+							tinsert(collapse, 1, index)
+							ExpandCurrencyList(index, true)
+						end
+					else
+						return index, CurrencyListInfo
 					end
-				else
-					return index, CurrencyListInfo
 				end
 			end
 		until index >= GetCurrencyListSize()
