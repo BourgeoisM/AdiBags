@@ -119,27 +119,25 @@ end
 local IterateCurrencies
 do
 	local function iterator(collapse, index)
-		local CurrencyListSize = GetCurrencyListSize()
-		if CurrencyListSize == 0 then return end
-		CurrencyListSize = CurrencyListSize - 2
+		if GetCurrencyListSize() == 0 then return end
 		if not index then return end
 		repeat
 			index = index + 1
-			-- debbugging currency due to blizzard changing the GetCurrency function return
+			if index > GetCurrencyListSize() then return end
 			CurrencyListInfo = GetCurrencyListInfo(index)
 			if CurrencyListInfo.name then
 				if CurrencyListInfo.isHeader then
 					if not CurrencyListInfo.isHeaderExpanded then
 						tinsert(collapse, 1, index)
-						ExpandCurrencyList(index, 1)
+						ExpandCurrencyList(index, true)
 					end
 				else
 					return index, CurrencyListInfo
 				end
 			end
-		until index >= CurrencyListSize
+		until index >= GetCurrencyListSize()
 		for i, index in ipairs(collapse) do
-			ExpandCurrencyList(index, 0)
+			ExpandCurrencyList(index, false)
 		end
 	end
 
