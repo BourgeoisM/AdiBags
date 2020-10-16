@@ -124,7 +124,7 @@ do
 		repeat
 			index = index + 1
 				if index <= GetCurrencyListSize() then
-				CurrencyListInfo = GetCurrencyListInfo(index)
+				local CurrencyListInfo = GetCurrencyListInfo(index)
 				if CurrencyListInfo.name then
 					if CurrencyListInfo.isHeader then
 						if not CurrencyListInfo.isHeaderExpanded then
